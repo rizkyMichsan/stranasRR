@@ -9,6 +9,7 @@ class Welcome extends CI_Controller
 		parent::__construct();
 
 		$this->load->helper('cookie');
+		$this->load->model('Mmenu');
 		if (!$this->ion_auth->logged_in()) {
 			redirect('login/index');
 		}
