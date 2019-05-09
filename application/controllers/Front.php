@@ -9,11 +9,12 @@ class Front extends CI_Controller
 		parent::__construct();
 
 		$this->load->helper('cookie');
-		$this->load->model('Mmenu');
+		$this->load->model('Front_model', 'front');
 	}
 
 	public function index()
 	{
-		$this->template->load('front', 'front', 'dash');
+		$data = array();
+		$this->template->load('front', 'front', 'dash', $data);
 	}
 }

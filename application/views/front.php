@@ -25,7 +25,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 fh5co_mediya_center"><a href="#" class="color_fff fh5co_mediya_setting"><i class="fa fa-clock-o"></i>&nbsp;&nbsp;&nbsp;Friday, 5 January 2018</a>
-                    <div class="d-inline-block fh5co_trading_posotion_relative"><a href="#" class="treding_btn">Trending</a>
+                    <div class="d-inline-block fh5co_trading_posotion_relative"><a href="#" class="treding_btn">Informasi</a>
                         <div class="fh5co_treding_position_absolute"></div>
                     </div>
                     <a href="#" class="color_fff fh5co_mediya_setting">Instagram’s big redesign goes live with black-and-white app</a>
@@ -109,7 +109,7 @@
     <div class="container-fluid fh5co_footer_bg pb-3">
         <div class="container animate-box">
             <div class="row">
-                <div class="col-12 spdp_right py-5"><img src="<?= base_url('assets/front/') ?>images/white_logo.png" alt="img" class="footer_logo" /></div>
+                <div class="col-12 spdp_right py-5"><img src="<?= base_url('assets/front/') ?>images/logo_rr_putih.png" alt="img" class="footer_logo" /></div>
                 <div class="clearfix"></div>
                 <div class="col-12 col-md-4 col-lg-3">
                     <div class="footer_main_title py-3"> About</div>
@@ -118,18 +118,17 @@
                         unknown printer took a galley of type and scrambled it to make a type specimen book.
                     </div>
                     <div class="footer_mediya_icon">
-                        <div class="text-center d-inline-block"><a class="fh5co_display_table_footer">
-                                <div class="fh5co_verticle_middle"><i class="fa fa-linkedin"></i></div>
-                            </a></div>
-                        <div class="text-center d-inline-block"><a class="fh5co_display_table_footer">
-                                <div class="fh5co_verticle_middle"><i class="fa fa-google-plus"></i></div>
-                            </a></div>
-                        <div class="text-center d-inline-block"><a class="fh5co_display_table_footer">
+
+                        <div class="text-center d-inline-block">
+                            <a href="https://twitter.com/stranasrr" target="_blank" class="fh5co_display_table_footer">
                                 <div class="fh5co_verticle_middle"><i class="fa fa-twitter"></i></div>
-                            </a></div>
-                        <div class="text-center d-inline-block"><a class="fh5co_display_table_footer">
+                            </a>
+                        </div>
+                        <div class="text-center d-inline-block">
+                            <a href="https://fb.com/bappenas" target="_blank" class="fh5co_display_table_footer">
                                 <div class="fh5co_verticle_middle"><i class="fa fa-facebook"></i></div>
-                            </a></div>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-12 col-md-3 col-lg-2">
@@ -182,7 +181,7 @@
     <div class="container-fluid fh5co_footer_right_reserved">
         <div class="container">
             <div class="row  ">
-                <div class="col-12 col-md-6 py-4 Reserved"> © Copyright 2018, All rights reserved. Design by <a href="https://freehtml5.co" title="Free HTML5 Bootstrap templates">FreeHTML5.co</a>. </div>
+                <div class="col-12 col-md-6 py-4 Reserved"> © Copyright <?php echo date('Y'); ?> All rights reserved. Created by <b>RMI</b>. </div>
                 <div class="col-12 col-md-6 spdp_right py-4">
                     <a href="#" class="footer_last_part_menu">Home</a>
                     <a href="Contact_us.html" class="footer_last_part_menu">About</a>
