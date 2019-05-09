@@ -6,7 +6,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>24 News — Free Website Template, Free HTML5 Template by FreeHTML5.co</title>
+    <title><?php echo $title; ?></title>
+    <link rel="icon" href="<?php echo base_url('assets/front/images/'); ?><?= $icon ?>" type="image/x-icon">
     <link href="<?= base_url('assets/front/') ?>css/media_query.css" rel="stylesheet" type="text/css" />
     <link href="<?= base_url('assets/front/') ?>css/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -37,7 +38,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-3 fh5co_padding_menu">
-                    <img src="<?= base_url('assets/front/') ?>images/logo_rr.png" alt="img" class="fh5co_logo_width" />
+                    <img src="<?= base_url('assets/front/') ?>images/<?= $logo ?>" alt="img" class="fh5co_logo_width" />
                 </div>
                 <div class="col-12 col-md-9 align-self-center fh5co_mediya_right">
                     <div class="text-center d-inline-block">
@@ -70,34 +71,30 @@
                 <a class="navbar-brand" href="#"><img src="<?= base_url('assets/front/') ?>images/logo_rr.png" alt="img" class="mobile_logo_width" /></a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="blog.html">Blog <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="single.html">Single <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">World <span class="sr-only">(current)</span></a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink_1">
-                                <a class="dropdown-item" href="#">Action in</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Community<span class="sr-only">(current)</span></a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink_1">
-                                <a class="dropdown-item" href="#">Action in</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="Contact_us.html">Contact <span class="sr-only">(current)</span></a>
-                        </li>
+                        <?php foreach ($main_menu as $mm) { ?>
+                            <li class="nav-item <?php echo ($mm['active'] == 'Y' ?  'active' : '');
+                                                $nummenu = $this->front->where('web_menu', array('id_parent' => $mm['id_menu']))->num_rows();
+                                                if ($nummenu > 0) {
+                                                    echo ' dropdown'; ?>">
+                                    <a class="nav-link dropdown-toggle" href="<?php echo $mm['link']; ?>" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $mm['menu_name']; ?> <span class="sr-only">(current)</span></a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink_1">
+                                        <?php $sm = $this->front->where('web_menu', array('id_parent' => $mm['id_menu']), 'list_number')->result_array();
+                                        foreach ($sm as $sm) {
+                                            echo '<a class="dropdown-item" href="' . base_url($sm['link']) . '">' . $sm['menu_name'] . '</a>';
+                                        }
+                                        ?>
+
+                                    </div>
+                                <?php
+                            } else {
+                                echo ''; ?>
+                                    ">
+                                    <a class="nav-link" href="<?php echo base_url($mm['link']); ?>"><?php echo $mm['menu_name']; ?> <span class="sr-only">(current)</span></a>
+                                <?php
+                            }   ?>
+                            </li>
+                        <?php } ?>
+
                     </ul>
                 </div>
             </nav>
@@ -109,13 +106,12 @@
     <div class="container-fluid fh5co_footer_bg pb-3">
         <div class="container animate-box">
             <div class="row">
-                <div class="col-12 spdp_right py-5"><img src="<?= base_url('assets/front/') ?>images/logo_rr_putih.png" alt="img" class="footer_logo" /></div>
+                <div class="col-12 spdp_right py-5"><img src="<?= base_url('assets/front/') ?>images/<?= $logo_putih ?>" alt="img" class="footer_logo" /></div>
                 <div class="clearfix"></div>
                 <div class="col-12 col-md-4 col-lg-3">
+
                     <div class="footer_main_title py-3"> About</div>
-                    <div class="footer_sub_about pb-3"> Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                        unknown printer took a galley of type and scrambled it to make a type specimen book.
+                    <div class="footer_sub_about pb-3"> <?php echo $profil; ?>
                     </div>
                     <div class="footer_mediya_icon">
 
@@ -131,20 +127,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-3 col-lg-2">
-                    <div class="footer_main_title py-3"> Category</div>
-                    <ul class="footer_menu">
-                        <li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Business</a></li>
-                        <li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Entertainment</a></li>
-                        <li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Environment</a></li>
-                        <li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Health</a></li>
-                        <li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Life style</a></li>
-                        <li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Politics</a></li>
-                        <li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Technology</a></li>
-                        <li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; World</a></li>
-                    </ul>
-                </div>
-                <div class="col-12 col-md-5 col-lg-3 position_footer_relative">
+
+                <div class="col-12 col-md-5 col-lg-5 position_footer_relative">
                     <div class="footer_main_title py-3"> Most Viewed Posts</div>
                     <div class="footer_makes_sub_font"> Dec 31, 2016</div>
                     <a href="#" class="footer_post pb-4"> Success is not a good teacher failure makes you humble </a>
@@ -155,16 +139,10 @@
                     <div class="footer_position_absolute"><img src="<?= base_url('assets/front/') ?>images/footer_sub_tipik.png" alt="img" class="width_footer_sub_img" /></div>
                 </div>
                 <div class="col-12 col-md-12 col-lg-4 ">
-                    <div class="footer_main_title py-3"> Last Modified Posts</div>
+                    <div class="footer_main_title py-3"> Related Link</div>
                     <a href="#" class="footer_img_post_6"><img src="<?= base_url('assets/front/') ?>images/allef-vinicius-108153.jpg" alt="img" /></a>
                     <a href="#" class="footer_img_post_6"><img src="<?= base_url('assets/front/') ?>images/32-450x260.jpg" alt="img" /></a>
                     <a href="#" class="footer_img_post_6"><img src="<?= base_url('assets/front/') ?>images/download (1).jpg" alt="img" /></a>
-                    <a href="#" class="footer_img_post_6"><img src="<?= base_url('assets/front/') ?>images/science-578x362.jpg" alt="img" /></a>
-                    <a href="#" class="footer_img_post_6"><img src="<?= base_url('assets/front/') ?>images/vil-son-35490.jpg" alt="img" /></a>
-                    <a href="#" class="footer_img_post_6"><img src="<?= base_url('assets/front/') ?>images/zack-minor-15104.jpg" alt="img" /></a>
-                    <a href="#" class="footer_img_post_6"><img src="<?= base_url('assets/front/') ?>images/download.jpg" alt="img" /></a>
-                    <a href="#" class="footer_img_post_6"><img src="<?= base_url('assets/front/') ?>images/download (2).jpg" alt="img" /></a>
-                    <a href="#" class="footer_img_post_6"><img src="<?= base_url('assets/front/') ?>images/ryan-moreno-98837.jpg" alt="img" /></a>
                 </div>
             </div>
             <div class="row justify-content-center pt-2 pb-4">
@@ -181,7 +159,7 @@
     <div class="container-fluid fh5co_footer_right_reserved">
         <div class="container">
             <div class="row  ">
-                <div class="col-12 col-md-6 py-4 Reserved"> © Copyright <?php echo date('Y'); ?> All rights reserved. Created by <b>RMI</b>. </div>
+                <div class="col-12 col-md-6 py-4 Reserved"> © Copyright <?php echo date('Y'); ?> All rights reserved. Created by <b><?php echo $copyright; ?></b>. </div>
                 <div class="col-12 col-md-6 spdp_right py-4">
                     <a href="#" class="footer_last_part_menu">Home</a>
                     <a href="Contact_us.html" class="footer_last_part_menu">About</a>

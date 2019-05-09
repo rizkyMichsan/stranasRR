@@ -16,9 +16,12 @@ class Front_model extends CI_Model
 		$query = $this->db->get($table, $limit);
 		return $query;
 	}
-	function where($table, $data)
+	function where($table, $data, $order = null)
 	{
-		$this->db->order_by('order', 'ASC');
+		if ($order != null) {
+			$this->db->order_by($order, 'ASC');
+		}
+
 		$query = $this->db->get_where($table, $data);
 		return $query;
 	}
