@@ -8,6 +8,10 @@ $string = "
                             <h4 class=\"modal-title\" id=\"defaultModalLabel\">".$c_url." Form</h4>
                         </div>
                         <div class=\"modal-body\">
+                        <?php
+                        \$attributes = array('id' => 'menu_form');
+                        echo form_open('', \$attributes);
+                        ?>
         <form action='' method=\"post\" id=\"".$c_url."_form\">";
 	    foreach ($non_pk as $row) {
            
@@ -25,7 +29,7 @@ $string = "
 	   $string .=" <input type=\"hidden\" name='".$pk."' id=\"".$pk."\"  /> 
        <button type=\"submit\" class=\"btn btn-primary waves-effect\">Save</button> 
        <button type=\"button\" class=\"btn btn-link waves-effect\" data-dismiss=\"modal\">CLOSE</button>
-	</form>
+       <?php echo form_close(); ?>
                         </div>
                         <div class=\"modal-footer\">
                         </div>
@@ -34,5 +38,3 @@ $string = "
             </div>";
 
 $hasil_view_form = createFile($string, $target."views/" . $c_url . "/" . $v_form_file);
-
-?>

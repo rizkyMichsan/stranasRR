@@ -11,6 +11,7 @@ class " . $c . " extends CI_Controller
     {
         parent::__construct();
         \$this->load->model('$m');
+        \$this->load->model('Mmenu');
         \$this->load->library('form_validation');
         \$this->load->helper('cookie');
 		if (!\$this->ion_auth->logged_in())
@@ -118,5 +119,3 @@ $string .= "\n\n}\n\n/* End of file $c_file */
 
 
 $hasil_controller = createFile($string, $target . "controllers/" . $c_file);
-
-?>

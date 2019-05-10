@@ -9,12 +9,12 @@ class Config extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Config_model');
+        $this->load->model('Mmenu');
         $this->load->library('form_validation');
         $this->load->helper('cookie');
-		if (!$this->ion_auth->logged_in())
-         {
-			redirect('login/index');
-		 }
+        if (!$this->ion_auth->logged_in()) {
+            redirect('login/index');
+        }
     }
 
     public function index()
@@ -26,18 +26,19 @@ class Config extends CI_Controller
             'message' => $this->session->userdata('message')
         );
 
-        $this->template->load('template','config','config_list',$data);
+        $this->template->load('template', 'config', 'config_list', $data);
         $this->load->view('config/config_form', $data);
         $this->session->unset_userdata('message');
     }
-    function get(){
-    	
-		            $id = $this->input->get('id');
-                $data = $this->Config_model->get_by_id($id);
+    function get()
+    {
+
+        $id = $this->input->get('id');
+        $data = $this->Config_model->get_by_id($id);
         echo json_encode($data);
     }
-    
-    public function create() 
+
+    public function create()
     {
         $this->_rules();
 
@@ -46,18 +47,18 @@ class Config extends CI_Controller
             redirect(site_url('config'));
         } else {
             $data = array(
-		'name' => $this->input->post('name',TRUE),
-		'code' => $this->input->post('code',TRUE),
-	    );
+                'name' => $this->input->post('name', TRUE),
+                'code' => $this->input->post('code', TRUE),
+            );
 
             $this->Config_model->insert($data);
             $this->session->set_flashdata('message', 'create');
             redirect(site_url('config'));
         }
     }
-    
-   
-    public function update() 
+
+
+    public function update()
     {
         $this->_rules();
 
@@ -66,17 +67,17 @@ class Config extends CI_Controller
             redirect(site_url('config'));
         } else {
             $data = array(
-		'name' => $this->input->post('name',TRUE),
-		'code' => $this->input->post('code',TRUE),
-	    );
+                'name' => $this->input->post('name', TRUE),
+                'code' => $this->input->post('code', TRUE),
+            );
 
             $this->Config_model->update($this->input->post('id', TRUE), $data);
             $this->session->set_flashdata('message', 'update');
             redirect(site_url('config'));
         }
     }
-    
-    public function delete($id) 
+
+    public function delete($id)
     {
         $row = $this->Config_model->get_by_id($id);
 
@@ -90,15 +91,14 @@ class Config extends CI_Controller
         }
     }
 
-    public function _rules() 
+    public function _rules()
     {
-	$this->form_validation->set_rules('name', 'name', 'trim|required');
-	$this->form_validation->set_rules('code', 'code', 'trim|required');
+        $this->form_validation->set_rules('name', 'name', 'trim|required');
+        $this->form_validation->set_rules('code', 'code', 'trim|required');
 
-	$this->form_validation->set_rules('id', 'id', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+        $this->form_validation->set_rules('id', 'id', 'trim');
+        $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
-
 }
 
 /* End of file Config.php */

@@ -9,12 +9,12 @@ class Menu extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Menu_model');
+        $this->load->model('Mmenu');
         $this->load->library('form_validation');
         $this->load->helper('cookie');
-		if (!$this->ion_auth->logged_in())
-         {
-			redirect('login/index');
-		 }
+        if (!$this->ion_auth->logged_in()) {
+            redirect('login/index');
+        }
     }
 
     public function index()
@@ -26,23 +26,25 @@ class Menu extends CI_Controller
             'message' => $this->session->userdata('message')
         );
 
-        $this->template->load('template','menu','sys_menu_list',$data);
+        $this->template->load('template', 'menu', 'sys_menu_list', $data);
         $this->load->view('menu/sys_menu_form', $data);
         $this->session->unset_userdata('message');
     }
-    function get(){
-    	
-		            $id = $this->input->get('id');
-                $data = $this->Menu_model->get_by_id($id);
-        echo json_encode($data);
-    }
-    function getParent(){
-    	$this->load->model('Mmenu');
+    function get()
+    {
+
         $id = $this->input->get('id');
-        $data = $this->Mmenu->where('sys_menu',array('stats'=>$id));
+        $data = $this->Menu_model->get_by_id($id);
         echo json_encode($data);
     }
-    public function create() 
+    function getParent()
+    {
+        $this->load->model('Mmenu');
+        $id = $this->input->get('id');
+        $data = $this->Mmenu->where('sys_menu', array('stats' => $id));
+        echo json_encode($data);
+    }
+    public function create()
     {
         $this->_rules();
 
@@ -51,22 +53,22 @@ class Menu extends CI_Controller
             redirect(site_url('menu'));
         } else {
             $data = array(
-		'menu_name' => $this->input->post('menu_name',TRUE),
-		'icon' => $this->input->post('icon',TRUE),
-		'link' => $this->input->post('link',TRUE),
-		'parent' => $this->input->post('parent',TRUE),
-		'stats' => $this->input->post('stats',TRUE),
-		'order' => $this->input->post('order',TRUE),
-	    );
+                'menu_name' => $this->input->post('menu_name', TRUE),
+                'icon' => $this->input->post('icon', TRUE),
+                'link' => $this->input->post('link', TRUE),
+                'parent' => $this->input->post('parent', TRUE),
+                'stats' => $this->input->post('stats', TRUE),
+                'order' => $this->input->post('order', TRUE),
+            );
 
             $this->Menu_model->insert($data);
             $this->session->set_flashdata('message', 'create');
             redirect(site_url('menu'));
         }
     }
-    
-   
-    public function update() 
+
+
+    public function update()
     {
         $this->_rules();
 
@@ -75,21 +77,21 @@ class Menu extends CI_Controller
             redirect(site_url('menu'));
         } else {
             $data = array(
-		'menu_name' => $this->input->post('menu_name',TRUE),
-		'icon' => $this->input->post('icon',TRUE),
-		'link' => $this->input->post('link',TRUE),
-		'parent' => $this->input->post('parent',TRUE),
-		'stats' => $this->input->post('stats',TRUE),
-		'order' => $this->input->post('order',TRUE),
-	    );
+                'menu_name' => $this->input->post('menu_name', TRUE),
+                'icon' => $this->input->post('icon', TRUE),
+                'link' => $this->input->post('link', TRUE),
+                'parent' => $this->input->post('parent', TRUE),
+                'stats' => $this->input->post('stats', TRUE),
+                'order' => $this->input->post('order', TRUE),
+            );
 
             $this->Menu_model->update($this->input->post('id_menu', TRUE), $data);
             $this->session->set_flashdata('message', 'update');
             redirect(site_url('menu'));
         }
     }
-    
-    public function delete($id) 
+
+    public function delete($id)
     {
         $row = $this->Menu_model->get_by_id($id);
 
@@ -103,19 +105,18 @@ class Menu extends CI_Controller
         }
     }
 
-    public function _rules() 
+    public function _rules()
     {
-	$this->form_validation->set_rules('menu_name', 'menu name', 'trim|required');
-	$this->form_validation->set_rules('icon', 'icon', 'trim');
-	$this->form_validation->set_rules('link', 'link', 'trim|required');
-	$this->form_validation->set_rules('parent', 'parent', 'trim|required');
-	$this->form_validation->set_rules('stats', 'stats', 'trim|required');
-	$this->form_validation->set_rules('order', 'order', 'trim|required');
+        $this->form_validation->set_rules('menu_name', 'menu name', 'trim|required');
+        $this->form_validation->set_rules('icon', 'icon', 'trim');
+        $this->form_validation->set_rules('link', 'link', 'trim|required');
+        $this->form_validation->set_rules('parent', 'parent', 'trim|required');
+        $this->form_validation->set_rules('stats', 'stats', 'trim|required');
+        $this->form_validation->set_rules('order', 'order', 'trim|required');
 
-	$this->form_validation->set_rules('id_menu', 'id_menu', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+        $this->form_validation->set_rules('id_menu', 'id_menu', 'trim');
+        $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
-
 }
 
 /* End of file Menu.php */
