@@ -171,7 +171,7 @@
                         $sm = $this->Mmenu->where('sys_menu', $data);
                         foreach ($sm as $sm) :
                             if ($this->uri->segment(1) == 'profile') {
-                                $ak = '';
+                                $ak = 'welcome';
                             } else {
                                 $ak = $this->uri->segment(1);
                             }
