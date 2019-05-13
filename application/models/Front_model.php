@@ -27,19 +27,18 @@ class Front_model extends CI_Model
 	}
 	function add($table, $data)
 	{
-		$hasil = $this->db->insert($table, $data);
-		return $hasil;
+		$this->db->insert($table, $data);
+		return $this->db->affected_rows();
 	}
-	function update($table, $id, $data)
+	function update($table, $id, $data, $primary)
 	{
-		$this->db->where('id', $id);
-		$hasil = $this->db->update($table, $data);
-		return $hasil;
+		$this->db->where($primary, $id);
+		$this->db->update($table, $data);
+		return $this->db->affected_rows();
 	}
 	function delete($table, $id, $primary)
 	{
-		$this->db->where($primary, $id);
-		$hasil = $this->db->delete($table);
-		return $hasil;
+		$this->db->delete($table, [$primary => $id]);
+		return $this->db->affected_rows();
 	}
 }
