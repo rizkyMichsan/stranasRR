@@ -37,4 +37,14 @@ class Api_User extends REST_Controller
             ], REST_Controller::HTTP_NOT_FOUND);
         }
     }
+    public function index_delete()
+    {
+        $id = $this->get('id');
+        if ($id === null) {
+            $this->response([
+                'status' => FALSE,
+                'message' => 'users Not found'
+            ], REST_Controller::HTTP_BAD_REQUEST);
+        } else { }
+    }
 }

@@ -30,4 +30,16 @@ class Front_model extends CI_Model
 		$hasil = $this->db->insert($table, $data);
 		return $hasil;
 	}
+	function update($table, $id, $data)
+	{
+		$this->db->where('id', $id);
+		$hasil = $this->db->update($table, $data);
+		return $hasil;
+	}
+	function delete($table, $id, $primary)
+	{
+		$this->db->where($primary, $id);
+		$hasil = $this->db->delete($table);
+		return $hasil;
+	}
 }
