@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>e-Office SA.04</title>
+    <title>Admin Server SA.04</title>
     <!-- Favicon-->
     <link rel="icon" href="<?php echo base_url(); ?>assets/images/photo.png" type="image/x-icon">
 
@@ -28,7 +28,7 @@
 <body class="login-page" style="background: url(<?php echo base_url(); ?>assets/images/office.jpg);background-size: 100%;">
     <div class="login-box">
         <div class="logo">
-            <a href="javascript:void(0);">e-office<b> SA.04</b></a>
+            <a href="javascript:void(0);">Admin Server<b> SA.04</b></a>
             <small>Staf Ahli Menteri Bidang Hubungan Kelembagaan</small>
         </div>
         <?php
