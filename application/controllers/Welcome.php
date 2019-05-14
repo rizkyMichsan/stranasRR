@@ -12,6 +12,8 @@ class Welcome extends CI_Controller
 		$this->load->model('Mmenu');
 		if (!$this->ion_auth->logged_in()) {
 			redirect('login/index');
+		} elseif ($this->uri->segment(1) == '') {
+			redirect('front');
 		}
 	}
 
